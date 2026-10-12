@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Voxa</title>
+  <link rel="stylesheet" href="./styles.css" />
+</head>
+<body>
+  <header class="topbar">
+    <button class="iconBtn" id="menuBtn" aria-label="Open menu">
+      <span class="menuIcon"></span>
+    </button>
+
+    <div class="brand">
+      <img src="./assets/voxa-logo.jpg" class="logo" alt="Voxa" />
+      <div>
+        <div class="brandName">Voxa</div>
+        <div class="brandMotto">Turn speech into clear text.</div>
+      </div>
+    </div>
+
+    <div class="userArea">
+      <div class="pill" id="planPill">Guest</div>
+      <div class="userHello" id="userHello">Hi</div>
+      <a class="linkBtn" id="loginLink" href="./login.html">Log in</a>
+      <a class="linkBtn primaryLink" id="signupLink" href="./signup.html">Sign up</a>
+    </div>
+  </header>
+
+  <div class="drawerOverlay" id="drawerOverlay"></div>
+  <aside class="drawer" id="drawer">
+    <div class="drawerHeader">
+      <div class="drawerTitle">History</div>
+      <button class="iconBtn" id="closeDrawerBtn" aria-label="Close menu">✕</button>
+    </div>
+
+    <div class="drawerActions">
+      <a class="drawerBtn" href="./settings.html">Settings</a>
+      <button class="drawerBtn danger" id="logoutBtn">Log out</button>
+    </div>
+
+    <div class="historyList" id="historyList"></div>
+
+    <button class="drawerBtn" id="loadMoreBtn">Load more</button>
+  </aside>
+
+  <main class="page">
+    <section class="card">
+      <h2>Transcription</h2>
+
+      <div class="row">
+        <label class="label" for="speechLang">Speaking language</label>
+        <select id="speechLang" class="select"></select>
+      </div>
+
+      <div class="btnRow">
+        <button class="btn primary" id="startBtn">Start</button>
+        <button class="btn" id="stopBtn" disabled>Stop</button>
+        <button class="btn ghost" id="clearTranscriptBtn">Clear</button>
+        <button class="btn ghost" id="copyTranscriptBtn">Copy</button>
+        
+      </div>
+
+      <div class="status" id="sttStatus">Ready.</div>
+
+      <textarea id="transcript" class="textarea" placeholder="Your speech will appear here..."></textarea>
+      <div class="btnRow">
+         <div class="download-group">
+  <select id="downloadFormat" class="download-select">
+    <option value="txt">TXT</option>
+    <option value="pdf">PDF</option>
+    <option value="docx" selected>DOCX</option>
+  </select>
+
+  <button id="downloadBtn" class="download-btn">
+    Download
+  </button>
+</div>
+      </div>
+      
+
+      <div class="vipNote" id="vipNote" hidden>
+        VIP feature. Please upgrade to Pro to use Smart formatting and Translation.
+      </div>
+
+      <div class="row2">
+        <div>
+          <label class="label" for="polishStyle">Smart formatting style</label>
+          <select id="polishStyle" class="select">
+            <option value="neutral">Neutral</option>
+            <option value="formal">Formal</option>
+            <option value="casual">Casual</option>
+          </select>
+        </div>
+        <div class="alignEnd">
+          <button class="btn" id="polishBtn">Smart format</button>
+        </div>
+      </div>
+
+      <div class="status" id="polishStatus">Waiting.</div>
+    </section>
+
+    <section class="card">
+      <h2>Translation</h2>
+
+      <div class="row2">
+        <div>
+          <label class="label" for="fromLang">From (optional)</label>
+          <select id="fromLang" class="input" ></select>
+        </div>
+        <div>
+          <label class="label" for="toLang">To</label>
+          <select id="toLang" class="input"></select>
+        </div>
+      </div>
+
+      <div class="btnRow">
+  <button class="btn" id="translateBtn">Translate</button>
+  <button class="btn ghost" id="speakTranslationBtn">
+    🔊 Speak
+  </button>
+</div>
+
+<textarea id="translated" class="textarea" placeholder="Translation will appear here..."></textarea>
+      <div class="status" id="translateStatus">Waiting.</div>
+
+      <div class="upgradeBox" id="upgradeBox" hidden>
+        <div class="upgradeTitle">Upgrade to Pro</div>
+        <div class="upgradeText">Pro unlocks Smart formatting, Translation, and full history syncing.</div>
+        <button class="btn primary" id="upgradeBtn">Upgrade</button>
+      </div>
+      <div id="toast" class="toast" hidden></div>
+    </section>
+  </main>
+
+  <script src="./common.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/jspdf@2.5.1/dist/jspdf.umd.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/docx@8.5.0/build/index.umd.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/file-saver@2.0.5/dist/FileSaver.min.js"></script>
+  <script src="./app.js"></script>
+  <script src="./support-bubbles.js"></script>
+  <footer class="app-footer">
+  <div class="footer-links">
+    <a href="/privacy.html">Privacy Policy</a>
+    <a href="/terms.html">Terms</a>
+    <a href="/refund.html">Refund Policy</a>
+  </div>
+  <p class="footer-copy">
+    © 2026 Voxa. All rights reserved.
+  </p>
+</footer>
+</body>
+</html>

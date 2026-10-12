@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Voxa Owner Dashboard</title>
+
+<link rel="stylesheet" href="owner.css">
+<link rel="stylesheet" href="admin.css">
+
+</head>
+
+<body>
+
+<div class="topbar">
+
+    <h1 style="padding-left: 400px;"> <img src="./assets/voxa-logo.jpg" style="height: 30px; width: 30px;">  Voxa Owner Dashboard</h1>
+
+    <button id="logoutBtn" class="logout-btn">
+        Logout
+    </button>
+
+</div>
+
+<div class="stats">
+
+    <div class="card">
+        <h3>Total Users</h3>
+        <h2 id="users">0</h2>
+    </div>
+
+    <div class="card">
+        <h3>Pro Users</h3>
+        <h2 id="pro">0</h2>
+    </div>
+
+    <div class="card">
+        <h3>Free Users</h3>
+        <h2 id="free">0</h2>
+    </div>
+
+    <div class="card">
+        <h3>Administrators</h3>
+        <h2 id="admins">0</h2>
+    </div>
+
+    <div class="card">
+        <h3>Payments</h3>
+        <h2 id="payments">0</h2>
+    </div>
+
+    <div class="card">
+        <h3>Revenue</h3>
+        <h2 id="revenue">₦0</h2>
+    </div>
+
+</div>
+
+<div class="table-card">
+
+    <input
+        id="search"
+        type="text"
+        placeholder="🔍 Search users...">
+
+    <table id="usersTable">
+
+        <thead>
+
+            <tr>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Plan</th>
+                <th>Admin</th>
+                <th>Actions</th>
+            </tr>
+
+        </thead>
+
+        <tbody id="tbody">
+
+        </tbody>
+
+    </table>
+
+</div>
+
+<script src="common.js"></script>
+<script src="owner.js"></script>
+
+</body>
+</html>

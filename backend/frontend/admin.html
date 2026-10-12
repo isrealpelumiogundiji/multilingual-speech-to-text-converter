@@ -1,0 +1,314 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Voxa Admin</title>
+
+<link rel="stylesheet" href="admin.css">
+
+<style>
+
+body{
+    background:#f4f6fb;
+}
+
+.container{
+    max-width:1300px;
+    margin:auto;
+    padding:25px;
+}
+
+.cards{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
+    gap:15px;
+}
+
+.card{
+    background:#fff;
+    padding:20px;
+    border-radius:12px;
+    box-shadow:0 2px 8px rgba(0,0,0,.08);
+}
+
+.card h1{
+    margin: 12px 0 0;
+    font-size:34px;
+}
+
+.card p{
+    margin-top:8px;
+    color:#666;
+}
+
+table{
+    width:100%;
+    border-collapse:collapse;
+    margin-top:20px;
+    background:#fff;
+}
+
+th,td{
+    padding:12px;
+    border-bottom:1px solid #ddd;
+    text-align:left;
+}
+
+button{
+    padding:8px 14px;
+    border:none;
+    border-radius:8px;
+    cursor:pointer;
+}
+
+.pro{
+    background:#1976d2;
+    color:white;
+}
+
+.free{
+    background:#f44336;
+    color:white;
+}
+
+.admin{
+    background:#2e7d32;
+    color:white;
+}
+
+.search{
+    width:100%;
+    padding:12px;
+    margin:20px 0;
+}
+
+.cards .card:nth-child(1) h1{
+    color:#1976d2;
+}
+
+.cards .card:nth-child(2) h1{
+    color:#2e7d32;
+}
+
+.cards .card:nth-child(3) h1{
+    color:#616161;
+}
+
+.cards .card:nth-child(4) h1{
+    color:#ef6c00;
+}
+
+.cards .card:nth-child(5) h1{
+    color:#7b1fa2;
+}
+
+.cards .card:nth-child(6) h1{
+    color:#00897b;
+}
+
+.plan-pro{
+    display:inline-block;
+    background:#2e7d32;
+    color:#fff;
+    padding:4px 10px;
+    border-radius:20px;
+    font-size:12px;
+    font-weight:bold;
+}
+
+.plan-free{
+    display:inline-block;
+    background:#757575;
+    color:#fff;
+    padding:4px 10px;
+    border-radius:20px;
+    font-size:12px;
+    font-weight:bold;
+}
+
+</style>
+
+</head>
+
+<body>
+
+  <div class="sidebar">
+
+    <h2> <img src="./assets/voxa-logo.jpg" style="height: 25px; width: 25px;">    VOXA</h2>
+
+    <button id="navDashboard" class="nav active">
+        Dashboard
+    </button>
+
+    <button id="navUsers" class="nav">
+        Users
+    </button>
+
+    <button id="navPayments" class="nav">
+        Payments
+    </button>
+
+    <button id="navAnalytics" class="nav">
+        Analytics
+    </button>
+
+    <button id="navSettings" class="nav">
+        Settings
+    </button>
+
+    <hr>
+
+    <button id="logoutBtn" class="nav">
+    🚪 Logout
+    </button>
+
+</div>
+
+<div class="mainContent">
+
+<div class="container">
+
+<div id="dashboardPage">
+<h1>Voxa Admin Dashboard</h1>
+
+<div class="cards">
+
+    <div class="card">
+        <h3>Total Users</h3>
+        <h1 id="users">0</h1>
+    </div>
+
+    <div class="card">
+        <h3>Pro Users</h3>
+        <h1 id="pro">0</h1>
+    </div>
+
+    <div class="card">
+        <h3>Free Users</h3>
+        <h1 id="free">0</h1>
+    </div>
+
+    <div class="card">
+        <h3>Admins</h3>
+        <h1 id="admins">0</h1>
+    </div>
+
+    <div class="card">
+        <h3>Payments</h3>
+        <h1 id="payments">0</h1>
+    </div>
+
+    <div class="card">
+        <h3>Total Revenue</h3>
+        <h1 id="revenue">₦0</h1>
+    </div>
+
+</div>
+
+<h2>Analytics</h2>
+
+<div class="cards">
+
+    <div class="card">
+        <h3>New Users Today</h3>
+        <h1 id="todayUsers">0</h1>
+    </div>
+
+    <div class="card">
+        <h3>Revenue Today</h3>
+        <h1 id="todayRevenue">₦0</h1>
+    </div>
+
+    <div class="card">
+        <h3>Total Transcripts</h3>
+        <h1 id="totalTranscripts">0</h1>
+    </div>
+
+    <div class="card">
+        <h3>Total Translations</h3>
+        <h1 id="totalTranslations">0</h1>
+    </div>
+
+    <div class="card">
+        <h3>Smart Formatting</h3>
+        <h1 id="totalFormatting">0</h1>
+    </div>
+
+</div>
+
+<h2>Revenue Analytics</h2>
+
+<div class="chartBox">
+    <canvas id="revenueChart"></canvas>
+</div>
+
+<h2>User Growth</h2>
+
+<div class="chartBox">
+    <canvas id="usersChart"></canvas>
+</div>
+
+</div>
+
+<div id="usersPage" style="display:none;">
+
+<input
+class="search"
+id="search"
+placeholder="Search user..."
+>
+
+<table>
+
+<thead>
+
+<tr>
+
+<th>Name</th>
+<th>Email</th>
+<th>Plan</th>
+<th>Pro Expires</th>
+<th>Admin</th>
+<th>Action</th>
+</tr>
+
+</thead>
+
+<tbody id="tbody">
+
+</tbody>
+
+</table>
+
+</div>
+
+<div id="paymentsPage" style="display:none;">
+
+<h2 style="margin-top:40px;">Payments</h2>
+
+<table id="paymentsTable">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Plan</th>
+            <th>Amount</th>
+            <th>Status</th>
+            <th>Date</th>
+        </tr>
+    </thead>
+
+    <tbody id="paymentsBody">
+
+    </tbody>
+</table>
+
+</div>
+</div>
+<script src="common.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="admin.js"></script>
+</div>
+</body>
+</html>

@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Signing in...</title>
+</head>
+<body>
+  <p>Signing you in...</p>
+
+  <script>
+(function(){
+  try{
+    const hash = window.location.hash || "";
+    if(!hash){
+      document.body.innerHTML = "No token found.";
+      return;
+    }
+
+    const params = new URLSearchParams(hash.substring(1));
+    const token = params.get("token");
+
+    if(!token){
+      document.body.innerHTML = "Token missing.";
+      return;
+    }
+
+    // Save token under BOTH keys
+    localStorage.setItem("voxa_token", token);
+    localStorage.setItem("token", token);
+
+    // Redirect to homepage
+    window.location.href = "/app.html?oauth=1";
+
+  }catch(err){
+    document.body.innerHTML = "OAuth error: " + err.message;
+  }
+})();
+</script>
+</body>
+</html>

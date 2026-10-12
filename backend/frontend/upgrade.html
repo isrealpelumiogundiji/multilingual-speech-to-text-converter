@@ -1,0 +1,400 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Upgrade | Voxa</title>
+
+  <style>
+    :root{
+      --bg:#0b1220;
+      --card:#101a2e;
+      --text:#e8eefc;
+      --muted:#a9b6d7;
+      --line:rgba(255,255,255,.10);
+      --btn:#e8eefc;
+      --btnText:#0b1220;
+      --accent:#7c5cff;
+      --off:#ffcc66;
+      --good:#33d49d;
+    }
+
+    *{ box-sizing:border-box; }
+    body{
+      margin:0;
+      font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      background: radial-gradient(1200px 600px at 20% -10%, rgba(124,92,255,.25), transparent 50%),
+                  radial-gradient(900px 500px at 90% 10%, rgba(51,212,157,.14), transparent 55%),
+                  var(--bg);
+      color:var(--text);
+    }
+
+    .wrap{ max-width: 980px; margin: 0 auto; padding: 28px 18px 48px; }
+
+    .topbar{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:12px;
+      margin-bottom: 18px;
+    }
+
+    .brand{ display:flex; align-items:center; gap:10px; font-weight: 700; }
+    .brandDot{
+      width:12px; height:12px; border-radius:999px;
+      background: linear-gradient(135deg, var(--accent), #3aa7ff);
+      box-shadow: 0 0 0 3px rgba(124,92,255,.20);
+    }
+
+    .back{
+      color:var(--muted);
+      text-decoration:none;
+      border:1px solid var(--line);
+      padding:10px 12px;
+      border-radius:12px;
+    }
+
+    h1{ margin: 10px 0 6px; font-size: 34px; line-height: 1.15; }
+    .sub{ margin:0 0 22px; color:var(--muted); max-width: 780px; font-size: 15px; }
+
+    .grid{
+      display:grid;
+      grid-template-columns: repeat(2, minmax(280px, 1fr));
+      gap: 14px;
+    }
+    @media (max-width: 720px){ .grid{ grid-template-columns: 1fr; } }
+
+    .card{
+      border:1px solid var(--line);
+      background: rgba(16,26,46,.78);
+      border-radius: 18px;
+      padding: 18px;
+      position: relative;
+      overflow: hidden;
+      min-height: 360px;
+    }
+
+    .card.featured{
+      background: linear-gradient(180deg, rgba(124,92,255,.30), rgba(16,26,46,.75));
+      border-color: rgba(124,92,255,.55);
+    }
+
+    .planName{ font-size: 28px; font-weight: 750; margin: 6px 0 8px; }
+
+    .pill{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      border:1px solid var(--line);
+      padding:6px 10px;
+      border-radius:999px;
+      color: var(--muted);
+      font-size: 12px;
+      margin-bottom: 10px;
+    }
+
+    .desc{ color:var(--muted); margin: 0 0 16px; font-size: 14px; }
+
+    .features{
+      margin-top: 14px;
+      padding-top: 14px;
+      border-top: 1px solid var(--line);
+      display:flex;
+      flex-direction:column;
+      gap:10px;
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .feat{ display:flex; gap:10px; align-items:flex-start; }
+    .tick{
+      width:18px; height:18px; border-radius:6px;
+      display:inline-flex; align-items:center; justify-content:center;
+      flex: 0 0 18px;
+      background: rgba(51,212,157,.15);
+      color: var(--good);
+      font-weight: 900;
+      margin-top: 1px;
+    }
+
+    .btn{
+      width:100%;
+      border:none;
+      border-radius: 14px;
+      padding: 12px 14px;
+      font-weight: 750;
+      cursor:pointer;
+      background: var(--btn);
+      color: var(--btnText);
+      transition: transform .08s ease;
+    }
+    .btn:active{ transform: scale(.99); }
+    .btn.secondary{
+      background: transparent;
+      border: 1px solid var(--line);
+      color: var(--text);
+    }
+
+    .priceBox{
+      border:1px solid var(--line);
+      border-radius: 16px;
+      padding: 12px;
+      margin-top: 10px;
+      background: rgba(0,0,0,.12);
+    }
+
+    .priceRow{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:12px;
+      padding: 10px 8px;
+      border-radius: 14px;
+      border:1px solid transparent;
+    }
+
+    .priceRow:hover{
+      border-color: rgba(255,255,255,.12);
+      background: rgba(255,255,255,.03);
+    }
+
+    .label{ font-weight: 750; }
+    .muted{ color: var(--muted); font-size: 12px; margin-top: 2px; }
+
+    .right{
+      display:flex;
+      align-items:center;
+      gap:10px;
+      flex-wrap: wrap;
+      justify-content:flex-end;
+    }
+
+    .old{
+      color: rgba(233, 240, 255, .55);
+      text-decoration: line-through;
+      font-weight: 650;
+      font-size: 13px;
+    }
+
+    .new{
+      font-weight: 850;
+      font-size: 15px;
+    }
+
+    .tag{
+      font-size: 11px;
+      font-weight: 900;
+      padding: 5px 8px;
+      border-radius: 999px;
+      background: rgba(255,204,102,.18);
+      border: 1px solid rgba(255,204,102,.35);
+      color: var(--off);
+      letter-spacing: .2px;
+    }
+
+    .chooseBtn{
+      border:none;
+      border-radius: 12px;
+      padding: 10px 12px;
+      font-weight: 800;
+      cursor:pointer;
+      background: rgba(232,238,252,.92);
+      color: var(--btnText);
+      white-space: nowrap;
+    }
+
+    .err{
+      margin-top: 12px;
+      color: #ffb4b4;
+      font-size: 13px;
+      display:none;
+    }
+
+    .loading{ opacity:.72; pointer-events:none; }
+  </style>
+</head>
+
+<body>
+  <div class="wrap">
+    <div class="topbar">
+      <div class="brand">
+        <span class="brandDot"></span>
+        <span>Voxa</span>
+      </div>
+      <a class="back" href="./app.html">Back to app</a>
+    </div>
+
+    <h1>Upgrade your plan</h1>
+    <p class="sub">Choose a Pro plan option to continue to Paystack payment.</p>
+
+    <div class="grid" id="grid">
+      <!-- Current plan -->
+      <div class="card">
+        <div class="planName">Current plan</div>
+        <div class="pill">FREE</div>
+        <p class="desc">You can use speech to text. Pro unlocks Smart formatting and Translation.</p>
+
+        <button class="btn secondary" type="button" onclick="location.href='./index.html'">Continue</button>
+
+        <div class="features">
+          <div class="feat"><span class="tick">✓</span><span>Speech to text recording</span></div>
+          <div class="feat"><span class="tick">✓</span><span>History saving</span></div>
+          <div class="feat"><span class="tick">✓</span><span>Basic usage limits</span></div>
+        </div>
+      </div>
+
+      <!-- Pro -->
+      <div class="card featured">
+        <div class="planName">Pro</div>
+        <div class="pill">VIP</div>
+        <p class="desc">Unlock Smart formatting and Translation while your Pro plan is active.</p>
+
+        <div class="priceBox">
+          <!-- Monthly -->
+          <div class="priceRow">
+            <div>
+              <div class="label">Monthly</div>
+              <div class="muted">Billed every month</div>
+            </div>
+            <div class="right">
+              <div class="new">₦200</div>
+              <button class="chooseBtn" type="button" data-plan="monthly">Choose</button>
+            </div>
+          </div>
+
+          <!-- Quarterly with 10% off -->
+          <div class="priceRow">
+            <div>
+              <div class="label">Quarterly</div>
+              <div class="muted">Pay every 3 months</div>
+            </div>
+            <div class="right">
+              <span class="tag">10% OFF</span>
+              <span class="old">₦600</span>
+              <span class="new">₦540</span>
+              <button class="chooseBtn" type="button" data-plan="quarterly">Choose</button>
+            </div>
+          </div>
+
+          <!-- Yearly with 20% off -->
+          <div class="priceRow">
+            <div>
+              <div class="label">Yearly</div>
+              <div class="muted">Pay once per year</div>
+            </div>
+            <div class="right">
+              <span class="tag">20% OFF</span>
+              <span class="old">₦2,400</span>
+              <span class="new">₦1,920</span>
+              <button class="chooseBtn" type="button" data-plan="yearly">Choose</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="features">
+          <div class="feat"><span class="tick">✓</span><span>Smart formatting (Polish)</span></div>
+          <div class="feat"><span class="tick">✓</span><span>Translation</span></div>
+          <div class="feat"><span class="tick">✓</span><span>Higher limits</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="err" id="errBox"></div>
+  </div>
+  <script src="./common.js"></script>
+  <script>
+    function looksLikeJwt(value){
+      if(!value || typeof value !== "string") return false;
+      const parts = value.split(".");
+      if(parts.length !== 3) return false;
+      if(parts[0].length < 8 || parts[1].length < 8) return false;
+      return true;
+    }
+
+    function getToken(){
+      const commonKeys = ["token", "authToken", "accessToken", "jwt", "voxa_token", "voxaToken"];
+      for(const k of commonKeys){
+        const v = localStorage.getItem(k);
+        if(looksLikeJwt(v)) return v;
+      }
+
+      for(let i = 0; i < localStorage.length; i++){
+        const key = localStorage.key(i);
+        const v = localStorage.getItem(key);
+        if(looksLikeJwt(v)) return v;
+      }
+
+      return "";
+    }
+
+    function goLogin(){
+      const next = encodeURIComponent("upgrade.html");
+      window.location.href = "./login.html?next=" + next;
+    }
+
+    async function api(url, opts = {}){
+      const token = getToken();
+      const headers = Object.assign({ "Content-Type": "application/json" }, opts.headers || {});
+      if(token) headers.Authorization = "Bearer " + token;
+
+      const finalUrl =
+  typeof url === "string" && url.startsWith("/api")
+    ? baseUrl() + url
+    : url;
+
+const res = await fetch(finalUrl, Object.assign({}, opts, { headers }));
+      const data = await res.json().catch(() => ({}));
+      if(!res.ok){
+        const msg = data.error || data.message || "Request failed";
+        throw new Error(msg);
+      }
+      return data;
+    }
+
+    function showError(msg){
+      const el = document.getElementById("errBox");
+      el.textContent = msg;
+      el.style.display = "block";
+    }
+
+    async function startCheckout(plan){
+      const grid = document.getElementById("grid");
+      grid.classList.add("loading");
+
+      try{
+        const data = await api("/api/billing/paystack/initialize", {
+          method: "POST",
+          body: JSON.stringify({ plan })
+        });
+
+        if(!data.url) throw new Error("No payment URL returned");
+        window.location.href = data.url;
+      }catch(err){
+        showError(err.message || "Payment initialization failed");
+        grid.classList.remove("loading");
+      }
+    }
+
+    document.querySelectorAll("button[data-plan]").forEach((btn) => {
+      btn.addEventListener("click", () => {
+        if(!getToken()){
+          goLogin();
+          return;
+        }
+        startCheckout(btn.getAttribute("data-plan"));
+      });
+    });
+  </script>
+  <script src="./support-bubbles.js"></script>
+  <footer class="app-footer">
+  <div class="footer-links">
+    <a href="/privacy.html">Privacy Policy</a>
+    <a href="/terms.html">Terms</a>
+    <a href="/refund.html">Refund Policy</a>
+  </div>
+  <p class="footer-copy">
+    © 2026 Voxa. All rights reserved.
+  </p>
+</footer>
+</body>
+</html>

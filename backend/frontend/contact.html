@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Contact | Voxa</title>
+  <link rel="stylesheet" href="/styles.css" />
+  <style>
+    .wrap{max-width:900px;margin:0 auto;padding:28px 16px}
+    .top{display:flex;align-items:center;justify-content:space-between;gap:16px}
+    .nav a{color:rgba(255,255,255,.75);text-decoration:none;margin-left:14px}
+    .nav a:hover{color:#a855f7}
+    .card{margin-top:18px;border:1px solid rgba(255,255,255,.10);background:rgba(255,255,255,.04);border-radius:18px;padding:18px}
+    label{display:block;margin-top:12px;color:rgba(255,255,255,.75);font-size:13px}
+    input, textarea{width:100%;margin-top:6px;padding:12px;border-radius:12px;border:1px solid rgba(255,255,255,.14);background:rgba(0,0,0,.18);color:#fff;outline:none}
+    textarea{min-height:130px;resize:vertical}
+    .btn{margin-top:14px;border:1px solid rgba(255,255,255,.14);background:#7c3aed;color:#fff;padding:10px 14px;border-radius:12px;text-decoration:none;display:inline-flex;align-items:center;justify-content:center;font-weight:600;cursor:pointer}
+    .btn:hover{opacity:.95}
+    .note{margin-top:12px;color:rgba(255,255,255,.60);font-size:13px;line-height:1.6}
+    .footer{margin-top:30px;padding:22px 0;text-align:center;border-top:1px solid rgba(255,255,255,.08);color:rgba(255,255,255,.45)}
+    .footer a{color:rgba(255,255,255,.75);text-decoration:none;margin:0 10px;font-size:13px}
+    .footer a:hover{color:#a855f7}
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="top">
+      <strong>Voxa</strong>
+      <div class="nav">
+        <a href="/landing.html">Home</a>
+        <a href="/about.html">About</a>
+        <a href="/login.html">Log in</a>
+      </div>
+    </div>
+
+    <div class="card">
+      <h1>Contact</h1>
+      <p class="note">
+        Use the form below to reach us. We respond as soon as possible.
+      </p>
+
+      <form id="contactForm">
+        <label for="name">Your name</label>
+        <input id="name" name="name" placeholder="Enter your name" required />
+
+        <label for="email">Your email</label>
+        <input id="email" name="email" type="email" placeholder="Enter your email" required />
+
+        <label for="message">Message</label>
+        <textarea id="message" name="message" placeholder="Type your message" required></textarea>
+
+        <button class="btn" type="submit">Send message</button>
+        <div id="status" class="note" style="margin-top:10px"></div>
+      </form>
+
+      <p class="note">
+        Email: <strong>voxa.technology@gmail.com</strong><br>
+        WhatsApp: <strong>+1 (272) 347-0487</strong>
+      </p>
+    </div>
+
+    <div class="footer">
+      <a href="/privacy.html">Privacy Policy</a>
+      <a href="/terms.html">Terms</a>
+      <a href="/refund.html">Refund Policy</a>
+      <div style="margin-top:10px">© 2026 Voxa. All rights reserved.</div>
+    </div>
+
+    <script>
+     document.getElementById("contactForm").addEventListener("submit", async (e) => {
+  e.preventDefault();
+
+  const name = document.getElementById("name").value.trim();
+  const email = document.getElementById("email").value.trim();
+  const message = document.getElementById("message").value.trim();
+
+  const statusEl = document.getElementById("status");
+  statusEl.textContent = "Sending...";
+
+  try {
+    const res = await fetch("/api/contact", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ name, email, message })
+    });
+
+    const data = await res.json().catch(() => ({}));
+    if (!res.ok) throw new Error(data.error || "Failed to send");
+
+    statusEl.textContent = "Message sent. We will reply soon.";
+    e.target.reset();
+  } catch (err) {
+    statusEl.textContent = err.message || "Failed to send";
+  }
+});
+    </script>
+  </div>
+</body>
+</html>

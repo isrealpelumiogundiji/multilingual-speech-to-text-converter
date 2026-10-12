@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Voxa | Multilingual Speech to Text</title>
+  <link rel="stylesheet" href="/styles.css" />
+  <style>
+    .lp-wrap{max-width:1100px;margin:0 auto;padding:28px 16px}
+    .lp-top{display:flex;align-items:center;justify-content:space-between;gap:16px}
+    .lp-brand{display:flex;align-items:center;gap:10px;text-decoration:none}
+    .lp-brand img{width:34px;height:34px;border-radius:10px}
+    .lp-brand strong{
+  font-size:18px;
+  color:var(--text);
+}
+    .lp-actions{display:flex;gap:10px;flex-wrap:wrap}
+    .btn{border:1px solid rgba(255,255,255,.14);background:rgba(255,255,255,.06);color:var(--text);padding:10px 14px;border-radius:12px;text-decoration:none;display:inline-flex;align-items:center;justify-content:center;font-weight:600}
+    .btn.primary{background:#7c3aed;border-color:#7c3aed}
+    .btn:hover{opacity:.95}
+    .hero{display:grid;grid-template-columns:1.2fr .8fr;gap:22px;margin-top:28px}
+    @media (max-width:900px){.hero{grid-template-columns:1fr}}
+    .card{border:1px solid rgba(255,255,255,.10);background:rgba(255,255,255,.04);border-radius:18px;padding:18px}
+    .h-title{font-size:38px;line-height:1.1;margin:0 0 12px}
+    .h-sub{
+  color:var(--muted);margin:0 0 18px;font-size:15px}
+    .pillrow{display:flex;gap:10px;flex-wrap:wrap;margin-top:14px}
+    .pill{border:1px solid rgba(255,255,255,.12);background:rgba(255,255,255,.03);padding:8px 10px;border-radius:999px;color:var(--muted);font-size:13px}
+    .demo-box{height:220px;border-radius:16px;border:1px dashed rgba(255,255,255,.18);display:flex;align-items:center;justify-content:center;color:rgba(255,255,255,.55);text-align:center;padding:16px}
+    .lp-footer{margin-top:36px;padding:22px 16px;text-align:center;border-top:1px solid rgba(255,255,255,.08);color:var(--muted);}
+    .lp-footer a{color:var(--text);text-decoration:none;margin:0 10px;font-size:13px}
+    .lp-footer a:hover{color:#a855f7}
+    .demo-box{
+  position: relative;
+  width: 100%;
+  padding-top: 60%;
+  border-radius: 16px;
+  overflow: hidden;
+  border: 1px solid rgba(255,255,255,.12);
+  background: rgba(255,255,255,.03);
+}
+
+.demo-img{
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  max-width: 90%;
+  max-height: 90%;
+  object-fit: contain;
+}
+
+/* THEME SUPPORT */
+
+.lp-brand strong{
+  color: var(--text);
+}
+
+.h-title{
+  color: var(--text);
+}
+
+.h-sub{
+  color: var(--muted);
+}
+
+.pill{
+  color: var(--muted);
+  border-color: var(--border);
+  background: var(--card2);
+}
+
+.lp-footer{
+  color: var(--muted);
+  border-top: 1px solid var(--border);
+}
+
+.lp-footer a{
+  color: var(--text);
+}
+
+.card{
+  background: var(--card);
+  border-color: var(--border);
+}
+
+.demo-box{
+  background: var(--card2);
+  border-color: var(--border);
+}
+
+.btn{
+  color: var(--text);
+  border-color: var(--border);
+  background: var(--controlBg);
+}
+
+  </style>
+</head>
+<body>
+  <div class="lp-wrap">
+    <div class="lp-top">
+      <a class="lp-brand" href="/landing.html">
+        <img src="./assets/voxa-logo.jpg" alt="Voxa logo" onerror="this.style.display='none'">
+        <strong>Voxa</strong>
+      </a>
+
+      <div class="lp-actions">
+        <a class="btn" href="/login.html">Log in</a>
+        <a class="btn primary" href="/signup.html">Create account</a>
+      </div>
+    </div>
+
+    <div class="hero">
+      <div class="card">
+        <h1 class="h-title">Turn speech into clear text in seconds</h1>
+        <p class="h-sub">
+          Voxa helps you transcribe, format, and translate speech with a clean workflow.
+          Built for students, creators, and teams who need fast, readable output.
+        </p>
+
+        <div class="lp-actions">
+          <a class="btn primary" href="/signup.html">Get started free</a>
+          <a class="btn" href="/login.html">I already have an account</a>
+        </div>
+
+        <div class="pillrow">
+          <span class="pill">Speech to text</span>
+          <span class="pill">Smart formatting</span>
+          <span class="pill">Translation</span>
+          <span class="pill">Download DOCX, PDF, TXT</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="demo-box">
+          <p>Preview</p><br>
+  <img src="assets/image.png" alt="Voxa app preview" class="demo-img">
+</div>
+        <p class="h-sub" style="margin-top:12px">
+          Works best on Chrome. Allow microphone access when prompted.
+        </p>
+      </div>
+    </div>
+<br><br>
+    <div class="lp-footer">
+      <a href="/about.html">About</a>
+      <a href="/contact.html">Contact</a>
+      <a href="/privacy.html">Privacy Policy</a>
+      <a href="/terms.html">Terms</a>
+      <a href="/refund.html">Refund Policy</a>
+      <div style="margin-top:10px">© 2026 Voxa. All rights reserved.</div>
+    </div>
+  </div>
+  <script src="./common.js"></script>
+</body>
+</html>

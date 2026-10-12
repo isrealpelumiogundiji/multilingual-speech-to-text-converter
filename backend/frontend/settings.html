@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Settings | Voxa</title>
+  <link rel="stylesheet" href="./styles.css" />
+</head>
+<body>
+  <header class="topbar simple">
+    <a class="linkBtn" href="./app.html">Back</a>
+    <div class="brand small">
+      <img src="./assets/voxa-logo.jpg" class="logo" alt="Voxa" />
+      <div>
+        <div class="brandName">Voxa</div>
+        <div class="brandMotto">Turn speech into clear text.</div>
+      </div>
+    </div>
+    <div class="pill" id="planPill">Free</div>
+  </header>
+
+  <main class="page">
+    <section class="card">
+      <h2>Profile</h2>
+
+      <div class="row2">
+        <div>
+          <label class="label">First name</label>
+          <input id="firstName" class="input" />
+        </div>
+        <div>
+          <label class="label">Last name</label>
+          <input id="lastName" class="input" />
+        </div>
+      </div>
+
+      <div class="row2">
+        <div>
+          <label class="label">Sex</label>
+          <select id="sex" class="select">
+            <option value="">Prefer not to say</option>
+            <option value="male">Male</option>
+            <option value="female">Female</option>
+          </select>
+        </div>
+        <div>
+          <label class="label">App Theme</label>
+          <select id="theme" class="select">
+            <option value="dark">Dark</option>
+            <option value="light">Light</option>
+            <option value="system">System</option>
+          </select>
+        </div>
+      </div>
+
+      <button class="btn primary" id="saveProfileBtn">Save profile</button>
+      <div class="status" id="profileStatus">Waiting.</div>
+    </section>
+
+    <section class="card">
+      <h2>Change email</h2>
+      <label class="label">New email</label>
+      <input id="newEmail" class="input" type="email" />
+      <button class="btn" id="changeEmailBtn">Update email</button>
+      <div class="status" id="emailStatus">Waiting.</div>
+    </section>
+
+    <section class="card">
+      <h2>Change password</h2>
+      <label class="label">Current password</label>
+      <input id="currentPassword" class="input" type="password" />
+      <label class="label">New password</label>
+      <input id="newPassword" class="input" type="password" minlength="6" />
+      <button class="btn" id="changePasswordBtn">Update password</button>
+      <div class="status" id="passStatus">Waiting.</div>
+    </section>
+  </main>
+
+  <script src="./common.js"></script>
+  <script src="./settings.js"></script>
+  <script src="./support-bubbles.js"></script>
+  <footer class="app-footer">
+  <div class="footer-links">
+    <a href="/privacy.html">Privacy Policy</a>
+    <a href="/terms.html">Terms</a>
+    <a href="/refund.html">Refund Policy</a>
+  </div>
+  <p class="footer-copy">
+    © 2026 Voxa. All rights reserved.
+  </p>
+</footer>
+</body>
+</html>

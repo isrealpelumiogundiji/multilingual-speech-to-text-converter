@@ -1,0 +1,179 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Admin Password Reset</title>
+  <style>
+  :root{
+    --bg:#0b1220;
+    --card:#101a2e;
+    --text:#e7eefc;
+    --muted:#a9b7d6;
+    --border:rgba(255,255,255,.10);
+    --accent:#6aa8ff;
+    --accent2:#7c5cff;
+  }
+
+  body{
+    margin:0;
+    min-height:100vh;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+    background: radial-gradient(1200px 600px at 20% 20%, rgba(106,168,255,.18), transparent 60%),
+                radial-gradient(1000px 600px at 80% 30%, rgba(124,92,255,.18), transparent 60%),
+                var(--bg);
+    color:var(--text);
+    padding: 24px;
+  }
+
+  .card{
+    width: min(520px, 100%);
+    background: linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.03));
+    border: 1px solid var(--border);
+    border-radius: 18px;
+    padding: 22px;
+    box-shadow: 0 18px 50px rgba(0,0,0,.35);
+  }
+
+  h1,h2{
+    margin:0 0 8px 0;
+    font-size: 22px;
+  }
+
+  p{
+    margin:0 0 16px 0;
+    color: var(--muted);
+    line-height: 1.5;
+  }
+
+  label{
+    display:block;
+    font-size: 13px;
+    margin: 0 0 6px 0;
+    color: var(--muted);
+  }
+
+  input{
+    width: 100%;
+    box-sizing: border-box;
+    background: rgba(0,0,0,.25);
+    border: 1px solid var(--border);
+    color: var(--text);
+    padding: 12px 12px;
+    border-radius: 12px;
+    outline: none;
+    font-size: 14px;
+  }
+
+  input:focus{
+    border-color: rgba(106,168,255,.5);
+    box-shadow: 0 0 0 4px rgba(106,168,255,.12);
+  }
+
+  button{
+    width: 100%;
+    margin-top: 12px;
+    border: 0;
+    cursor: pointer;
+    color: #071022;
+    font-weight: 700;
+    padding: 12px 14px;
+    border-radius: 12px;
+    background: linear-gradient(90deg, var(--accent), var(--accent2));
+  }
+
+  button:disabled{
+    opacity: .6;
+    cursor: not-allowed;
+  }
+
+  .msg{
+    margin-top: 12px;
+    font-size: 14px;
+    color: var(--muted);
+  }
+
+  .back{
+    display:inline-block;
+    margin-top: 14px;
+    color: var(--accent);
+    text-decoration: none;
+    font-weight: 600;
+  }
+
+  .back:hover{
+    text-decoration: underline;
+  }
+</style>
+</head>
+<body>
+  <div class="card">
+    <h1>Forgot password</h1>
+    <p>Enter your email and we will send a reset link.</p>
+
+    <!-- Keep your existing input + button here -->
+    <!-- Example layout -->
+    <label for="email">Email</label>
+    <input id="email" type="email" placeholder="Email" />
+
+    <button id="btn">Send reset link</button>
+
+    <div class="msg" id="msg"></div>
+
+    <a class="back" href="./admin-login.html">Back to login</a>
+  </div>
+
+  <script src="./common.js"></script>
+  <script>
+    const emailEl = document.getElementById("email");
+    const msgEl = document.getElementById("msg");
+    const btn = document.getElementById("btn");
+
+    btn.addEventListener("click", async () => {
+      msgEl.textContent = "";
+      const email = String(emailEl.value || "").trim();
+
+      if (!email) {
+        msgEl.textContent = "Enter your email.";
+        return;
+      }
+
+      btn.disabled = true;
+
+      try {
+        const res = await fetch(baseUrl() + "/api/auth/forgot-password", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ email })
+        });
+        const data = await res.json().catch(() => ({}));
+
+        if (!res.ok) {
+          msgEl.textContent = data.error || "Request failed.";
+          btn.disabled = false;
+          return;
+        }
+
+        msgEl.textContent = "If the email exists, a reset link has been sent.";
+      } catch {
+        msgEl.textContent = "Network error.";
+      } finally {
+        btn.disabled = false;
+      }
+    });
+  </script>
+  <footer class="app-footer">
+  <div class="footer-links">
+    <a href="/privacy.html">Privacy Policy</a>
+    <a href="/terms.html">Terms</a>
+    <a href="/refund.html">Refund Policy</a>
+  </div>
+  <p class="footer-copy">
+    © 2026 Voxa. All rights reserved.
+  </p>
+</footer>
+</body>
+</html>

@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sign up | Voxa</title>
+  <link rel="stylesheet" href="./styles.css" />
+</head>
+<body>
+  <main class="authWrap">
+    <div class="authCard">
+      <div class="authBrand">
+        <img src="./assets/voxa-logo.jpg" class="logo" alt="Voxa" />
+        <div>
+          <div class="brandName">Voxa</div>
+          <div class="brandMotto">Turn speech into clear text.</div>
+        </div>
+      </div>
+
+      <h1 class="authTitle">Create account</h1>
+
+      <form id="signupForm" class="form">
+        <div class="row2">
+          <div>
+            <label class="label">First name</label>
+            <input id="firstName" class="input" required />
+          </div>
+          <div>
+            <label class="label">Last name</label>
+            <input id="lastName" class="input" required />
+          </div>
+        </div>
+
+        <label class="label">Email</label>
+        <input id="email" class="input" type="email" required />
+
+        <label class="label">Password</label>
+        <input id="password" class="input" type="password" minlength="8" required />
+
+        <button class="btn primary" type="submit">Sign up</button>
+        <div class="status" id="status">Waiting.</div>
+        <div class="orRow">
+  <span></span>
+  <div class="orText">or</div>
+  <span></span>
+</div>
+
+<button id="googleSignupBtn" type="button" class="btn googleBtn">
+  <span class="gIcon" aria-hidden="true">G</span>
+  <span>Continue with Google</span>
+</button>
+
+<div class="err" id="googleErr" style="display:none;"></div>
+      </form>
+
+      <div class="authFooter">
+        Already have an account? <a href="./login.html" style="text-decoration: none; color: green;">Log in</a>
+      </div>
+    </div>
+  </main>
+
+  <script src="./common.js"></script>
+  <script src="./signup.js"></script>
+  <script src="./support-bubbles.js"></script>
+  <footer class="app-footer">
+  <div class="footer-links">
+    <a href="/privacy.html">Privacy Policy</a>
+    <a href="/terms.html">Terms</a>
+    <a href="/refund.html">Refund Policy</a>
+  </div>
+  <p class="footer-copy">
+    © 2026 Voxa. All rights reserved.
+  </p>
+</footer>
+</body>
+</html>

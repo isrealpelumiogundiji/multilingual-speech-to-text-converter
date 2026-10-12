@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Admin Login</title>
+  <link rel="stylesheet" href="./styles.css" />
+</head>
+
+<body>
+  <main class="authWrap">
+    <div class="authCard">
+      <h1 class="authTitle">Admin login</h1>
+
+      <form id="adminLoginForm" class="form">
+        <label class="label">Email</label>
+        <input id="email" class="input" type="email" placeholder="admin email" required />
+
+        <label class="label" style="margin-top:12px;">Password</label>
+        <input id="password" class="input" type="password" placeholder="admin password" required />
+
+        <button id="submitBtn" class="btnPrimary" type="submit" style="margin-top:14px;">
+          Log in
+        </button>
+        <a href="./admin-forgot.html">Forgot password?</a>
+
+        <p id="msg" class="status" style="margin-top:12px;"></p>
+      </form>
+
+      <div class="authFooter" style="margin-top:12px;">
+        <a href="./index.html">Back to app</a>
+      </div>
+    </div>
+  </main>
+
+  <script src="./common.js"></script>
+  <script src="./admin-login.js"></script>
+  <footer class="app-footer">
+  <div class="footer-links">
+    <a href="/privacy.html">Privacy Policy</a>
+    <a href="/terms.html">Terms</a>
+    <a href="/refund.html">Refund Policy</a>
+  </div>
+  <p class="footer-copy">
+    © 2026 Voxa. All rights reserved.
+  </p>
+</footer>
+</body>
+</html>

@@ -1,0 +1,10 @@
+# flyctl launch added from .gitignore
+**/node_modules
+**/.env
+**/*.sqlite
+**/*.db
+**/.DS_Store
+
+# flyctl launch added from backend/.gitignore
+backend/**/node_modules .env voxa.sqlite
+fly.toml

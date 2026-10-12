@@ -1,0 +1,238 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<title>Payment Verification</title>
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial,Helvetica,sans-serif;
+}
+
+body{
+    background:linear-gradient(135deg,#0f172a,#1e293b);
+    min-height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    padding:20px;
+}
+
+.card{
+    width:100%;
+    max-width:420px;
+    background:#fff;
+    border-radius:18px;
+    padding:40px 30px;
+    text-align:center;
+    box-shadow:0 20px 60px rgba(0,0,0,.25);
+}
+
+.icon{
+    width:90px;
+    height:90px;
+    margin:0 auto 20px;
+    border-radius:50%;
+    background:#e8f5e9;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    font-size:42px;
+}
+
+h2{
+    color:#1f2937;
+    margin-bottom:15px;
+}
+
+#msg{
+    color:#555;
+    line-height:1.6;
+    margin-top:10px;
+}
+
+.spinner{
+    width:42px;
+    height:42px;
+    border:4px solid #ddd;
+    border-top:4px solid #2563eb;
+    border-radius:50%;
+    margin:25px auto 0;
+    animation:spin .8s linear infinite;
+}
+
+.hidden{
+    display:none;
+}
+
+@keyframes spin{
+    to{
+        transform:rotate(360deg);
+    }
+}
+
+.success{
+    background:#22c55e;
+    color:#fff;
+}
+
+.error{
+    background:#ef4444;
+    color:#fff;
+}
+
+.footer{
+    margin-top:30px;
+    color:#888;
+    font-size:14px;
+}
+</style>
+
+</head>
+
+<body>
+
+<div class="card">
+
+    <div id="icon" class="icon">
+        💳
+    </div>
+
+    <h2>Processing Payment</h2>
+
+    <p id="msg">
+        Please wait while we verify your payment...
+    </p>
+
+    <div id="spinner" class="spinner"></div>
+
+    <div class="footer">
+        Do not close this page.
+    </div>
+
+</div>
+
+<script src="./common.js"></script>
+
+<script>
+
+function q(name){
+    return new URLSearchParams(window.location.search).get(name) || "";
+}
+
+async function run(){
+
+    const reference=q("reference");
+    const plan=q("plan") || "monthly";
+
+    const msg=document.getElementById("msg");
+    const spinner=document.getElementById("spinner");
+    const icon=document.getElementById("icon");
+
+    if(!reference){
+        spinner.classList.add("hidden");
+        icon.classList.add("error");
+        icon.innerHTML="✕";
+        msg.textContent="No payment reference found.";
+        return;
+    }
+
+    try{
+
+        msg.textContent="Verifying payment...";
+
+        const res=await fetch(
+            baseUrl()+`/api/billing/paystack/verify?reference=${encodeURIComponent(reference)}&plan=${encodeURIComponent(plan)}`
+        );
+
+        const data=await res.json();
+
+        if(!res.ok){
+
+            spinner.classList.add("hidden");
+
+            icon.classList.add("error");
+            icon.innerHTML="✕";
+
+            msg.textContent=data.error || "Verification failed.";
+
+            return;
+
+        }
+
+        msg.textContent="Payment verified successfully. Updating your account...";
+
+        const token=localStorage.getItem("token") || "";
+
+        if(token){
+
+            const meRes=await fetch(baseUrl()+"/api/me",{
+                headers:{
+                    Authorization:"Bearer "+token
+                }
+            });
+
+            const me=await meRes.json();
+
+            if(meRes.ok){
+
+                localStorage.setItem("user",JSON.stringify(me));
+
+                spinner.classList.add("hidden");
+
+                icon.classList.add("success");
+                icon.innerHTML="✓";
+
+                document.querySelector("h2").textContent="Payment Successful";
+
+                msg.textContent="Your Pro subscription has been activated. Redirecting...";
+
+                setTimeout(()=>{
+                    window.location.href="/app.html";
+                },1500);
+
+                return;
+            }
+
+        }
+
+        spinner.classList.add("hidden");
+
+        icon.classList.add("success");
+        icon.innerHTML="✓";
+
+        document.querySelector("h2").textContent="Payment Successful";
+
+        msg.textContent="Payment verified. Please log in again.";
+
+        setTimeout(()=>{
+            window.location.href="/login.html";
+        },1800);
+
+    }
+    catch(e){
+
+        spinner.classList.add("hidden");
+
+        icon.classList.add("error");
+        icon.innerHTML="✕";
+
+        document.querySelector("h2").textContent="Verification Failed";
+
+        msg.textContent=e.message || "Unknown error.";
+
+    }
+
+}
+
+run();
+
+</script>
+
+</body>
+</html>
